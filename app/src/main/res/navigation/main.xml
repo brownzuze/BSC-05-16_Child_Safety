@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    app:startDestination="@id/home">
+
+    <fragment
+        android:id="@+id/menuProfile"
+        android:name="com.example.childsafetyapp.profileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/menuSettings"
+        android:name="com.example.childsafetyapp.SettingsFragment"
+        android:label="Settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/menuNotifications"
+        android:name="com.example.childsafetyapp.NotificationFragment"
+        android:label="Notifications"
+        tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/home"
+        android:name="com.example.childsafetyapp.homeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/menuAbout"
+        android:name="com.example.childsafetyapp.aboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/menuSupport"
+        android:name="com.example.childsafetyapp.supportFragment"
+        android:label="fragment_support"
+        tools:layout="@layout/fragment_support" />
+    <fragment
+        android:id="@+id/menuSetPin"
+        android:name="com.example.childsafetyapp.setFragment"
+        android:label="fragment_set"
+        tools:layout="@layout/fragment_set" />
+</navigation>

@@ -1,0 +1,73 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddHelpLine"
+    android:background="@color/whitesmoke">
+
+    <EditText
+        android:id="@+id/txt_helpline_name"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:hint="@string/company_name"
+        android:layout_marginTop="24dp"
+        android:inputType="text"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/rounde_edt"
+        android:paddingLeft="5dp"
+        android:textAppearance="?android:attr/textAppearance"
+        android:textColor="@android:color/black" />
+
+    <EditText
+        android:id="@+id/txt_helplinenumber"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/txt_helpline_name"
+        android:layout_marginTop="8dp"
+        android:hint="@string/contact_number"
+        android:inputType="number"
+        android:lines="2"
+        android:maxLines="2"
+        android:paddingLeft="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/rounde_edt"
+        android:textAppearance="?android:attr/textAppearance"
+        android:textColor="@android:color/black" />
+
+    <EditText
+        android:id="@+id/txt_helpline_email"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/txt_helplinenumber"
+        android:layout_marginTop="8dp"
+        android:hint="@string/email"
+        android:inputType="text"
+        android:paddingLeft="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/rounde_edt"
+        android:textAppearance="?android:attr/textAppearance"
+        android:textColor="@android:color/black" />
+
+    
+    <Button
+        android:id="@+id/btn_add_line2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_helpline_email"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:paddingBottom="2dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="2dp"
+        android:backgroundTint="#c8c8c8"
+        android:text="@string/add"
+        android:textColor="@color/black"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>

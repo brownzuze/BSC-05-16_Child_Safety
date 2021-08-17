@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LogIn">
+
+    <ImageView
+        android:id="@+id/ic_account"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/ic_account"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/txtlogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ic_account"
+        android:textSize="25sp"
+        android:textColor="#000"
+        android:layout_centerHorizontal="true"/>
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:id="@+id/edit_user"
+        android:layout_below="@+id/txtlogin"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:hint="Username..."
+        android:layout_marginTop="30dp"
+        android:background="@drawable/rounde_edittext"
+        android:drawableLeft="@drawable/ic_account"
+        android:paddingLeft="10dp"
+        android:drawablePadding="10dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:id="@+id/edit_pw"
+        android:layout_below="@+id/edit_user"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:hint="Password..."
+        android:layout_marginTop="15dp"
+        android:background="@drawable/rounde_edittext"
+        android:drawableLeft="@drawable/ic_lock"
+        android:paddingLeft="10dp"
+        android:drawablePadding="10dp"/>
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/edit_pw"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_button"
+        android:text="Login"
+        android:onClick="onLaunchSignIn"
+        android:textColor="#ffffff"
+        app:backgroundTint="@color/steal_blue" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create a New Account"
+        android:onClick="onRegister"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="18sp"
+        android:textColor="@color/steal_blue"
+        android:layout_marginBottom="50dp"/>
+
+
+</RelativeLayout>
