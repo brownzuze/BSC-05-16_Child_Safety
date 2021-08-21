@@ -43,7 +43,7 @@ public class ListOrganisationAdapter extends BaseAdapter {
 		if(v == null) {
 			v = mInflater.inflate(R.layout.list_item_organisation, parent, false);
 			holder = new ViewHolder();
-			holder.txtOrganisationName = (TextView) v.findViewById(R.id.txt_company_name);
+			holder.txtOrganisationName = (TextView) v.findViewById(R.id.txt_organisation_name);
 			holder.txtAddress = (TextView) v.findViewById(R.id.txt_address);
 			holder.txtPhoneNumber = (TextView) v.findViewById(R.id.txt_phone_number);
 			holder.txtWebsite = (TextView) v.findViewById(R.id.txt_website);

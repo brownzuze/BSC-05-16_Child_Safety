@@ -25,17 +25,17 @@ public class ListChildActivity extends Activity implements OnItemLongClickListen
 
 	public static final int REQUEST_CODE_ADD_Children = 40;
 	public static final String EXTRA_ADDED_EMPLOYEE = "extra_key_added_employee";
-	public static final String EXTRA_SELECTED_COMPANY_ID = "extra_key_selected_company_id";
+	public static final String EXTRA_SELECTED_ORGANISATION_ID = "extra_key_selected_company_id";
 
 	private ListView mListviewChildren;
 	private TextView mTxtEmptyListChildren;
-	private ImageButton mBtnAddChildren;
+private ImageButton mBtnAddChildren;
 
 	private ListChildAdapter mAdapter;
 	private List<Child> mListChildren;
 	private ChildDAO mChildDao;
 
-	private long mCompanyId = -1;
+	private long mOrganisationId = -1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,15 +45,15 @@ public class ListChildActivity extends Activity implements OnItemLongClickListen
 		// initialize views
 		initViews();
 
-		// get the company id from extras
+		// get the organisation id from extras
 		mChildDao = new ChildDAO(this);
 		Intent intent  = getIntent();
 		if(intent != null) {
-			this.mCompanyId = intent.getLongExtra(EXTRA_SELECTED_COMPANY_ID, -1);
+			this.mOrganisationId = intent.getLongExtra(EXTRA_SELECTED_ORGANISATION_ID, -1);
 		}
 
-		if(mCompanyId != -1) {
-			mListChildren = mChildDao.getEmployeesOfCompany(mCompanyId);
+		if(mOrganisationId != -1) {
+			mListChildren = mChildDao.getChildOfOrganisation(mOrganisationId);
 			// fill the listView
 			if(mListChildren != null && !mListChildren.isEmpty()) {
 				mAdapter = new ListChildAdapter(this, mListChildren);
@@ -99,7 +99,7 @@ public class ListChildActivity extends Activity implements OnItemLongClickListen
 
 				if(mChildDao == null)
 					mChildDao = new ChildDAO(this);
-				mListChildren = mChildDao.getEmployeesOfCompany(mCompanyId);
+				mListChildren = mChildDao.getChildOfOrganisation(mOrganisationId);
 				if(mAdapter == null) {
 					mAdapter = new ListChildAdapter(this, mListChildren);
 					mListviewChildren.setAdapter(mAdapter);
@@ -155,7 +155,7 @@ public class ListChildActivity extends Activity implements OnItemLongClickListen
 			public void onClick(DialogInterface dialog, int which) {
 				// delete the child and refresh the list
 				if(mChildDao != null) {
-					mChildDao.deleteEmployee(child);
+					mChildDao.deleteChild(child);
 					
 					//refresh the listView
 					mListChildren.remove(child);

@@ -6,7 +6,7 @@
     tools:context=".AddOrganisationActivity" >
 
     <EditText
-        android:id="@+id/txt_company_name"
+        android:id="@+id/txt_organisation_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/company_name"
@@ -19,7 +19,7 @@
         android:id="@+id/txt_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_company_name"
+        android:layout_below="@+id/txt_organisation_name"
         android:layout_marginTop="8dp"
         android:hint="@string/address"
         android:inputType="text"

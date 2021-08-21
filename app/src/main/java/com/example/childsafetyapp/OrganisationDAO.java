@@ -65,10 +65,10 @@ public class OrganisationDAO {
 		long id = organisation.getId();
 		// delete all children of this organisation
 		ChildDAO childDao = new ChildDAO(mContext);
-		List<Child> listChildren = childDao.getEmployeesOfCompany(id);
+		List<Child> listChildren = childDao.getChildOfOrganisation(id);
 		if (listChildren != null && !listChildren.isEmpty()) {
 			for (Child e : listChildren) {
-				childDao.deleteEmployee(e);
+				childDao.deleteChild(e);
 			}
 		}
 

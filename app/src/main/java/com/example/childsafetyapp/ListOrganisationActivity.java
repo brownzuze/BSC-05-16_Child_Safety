@@ -121,7 +121,7 @@ public class ListOrganisationActivity extends Activity implements OnItemLongClic
 		Organisation clickedOrganisation = mAdapter.getItem(position);
 		Log.d(TAG, "clickedItem : "+ clickedOrganisation.getName());
 		Intent intent = new Intent(this, ListChildActivity.class);
-		intent.putExtra(ListChildActivity.EXTRA_SELECTED_COMPANY_ID, clickedOrganisation.getId());
+		intent.putExtra(ListChildActivity.EXTRA_SELECTED_ORGANISATION_ID, clickedOrganisation.getId());
 		startActivity(intent);
 	}
 

@@ -12,7 +12,7 @@ import android.util.Log;
 
 public class ChildDAO {
 
-	public static final String TAG = "EmployeeDAO";
+	public static final String TAG = "ChildDAO";
 
 	private Context mContext;
 
@@ -46,36 +46,36 @@ public class ChildDAO {
 		mDbHelper.close();
 	}
 
-	public Child createEmploye(String firstName, String lastName,
-                               String address, String email, String phoneNumber, String salary,
-                               long companyId) {
+	public Child createChild(String firstName, String lastName,
+							 String address, String email, String phoneNumber, String date,
+							 long organisationId) {
 		ContentValues values = new ContentValues();
 		values.put(DBHelper.COLUMN_CHILD_FIRST_NAME, firstName);
 		values.put(DBHelper.COLUMN_CHILD_LAST_NAME, lastName);
 		values.put(DBHelper.COLUMN_CHILD_ADDRESS, address);
 		values.put(DBHelper.COLUMN_CHILD_EMAIL, email);
 		values.put(DBHelper.COLUMN_CHILD_PHONE_NUMBER, phoneNumber);
-		values.put(DBHelper.COLUMN_CHILD_SALARY, salary);
-		values.put(DBHelper.COLUMN_CHILD_COMPANY_ID, companyId);
+		values.put(DBHelper.COLUMN_CHILD_SALARY, date);
+		values.put(DBHelper.COLUMN_CHILD_COMPANY_ID, organisationId);
 		long insertId = mDatabase
 				.insert(DBHelper.TABLE_CHILDREN, null, values);
 		Cursor cursor = mDatabase.query(DBHelper.TABLE_CHILDREN, mAllColumns,
 				DBHelper.COLUMN_CHILD_ID + " = " + insertId, null, null,
 				null, null);
 		cursor.moveToFirst();
-		Child newChild = cursorToEmploye(cursor);
+		Child newChild = cursorToChild(cursor);
 		cursor.close();
 		return newChild;
 	}
 
-	public void deleteEmployee(Child child) {
+	public void deleteChild(Child child) {
 		long id = child.getId();
-		System.out.println("the deleted employee has the id: " + id);
+		System.out.println("the deleted child has the id: " + id);
 		mDatabase.delete(DBHelper.TABLE_CHILDREN, DBHelper.COLUMN_CHILD_ID
 				+ " = " + id, null);
 	}
 
-	public List<Child> getAllEmployees() {
+	public List<Child> getAllChildren() {
 		List<Child> listChildren = new ArrayList<Child>();
 
 		Cursor cursor = mDatabase.query(DBHelper.TABLE_CHILDREN, mAllColumns,
@@ -83,7 +83,7 @@ public class ChildDAO {
 
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
-			Child child = cursorToEmploye(cursor);
+			Child child = cursorToChild(cursor);
 			listChildren.add(child);
 			cursor.moveToNext();
 		}
@@ -92,16 +92,16 @@ public class ChildDAO {
 		return listChildren;
 	}
 
-	public List<Child> getEmployeesOfCompany(long companyId) {
+	public List<Child> getChildOfOrganisation(long organisationId) {
 		List<Child> listChildren = new ArrayList<Child>();
 
 		Cursor cursor = mDatabase.query(DBHelper.TABLE_CHILDREN, mAllColumns,
 				DBHelper.COLUMN_ORGANISATION_ID + " = ?",
-				new String[] { String.valueOf(companyId) }, null, null, null);
+				new String[] { String.valueOf(organisationId) }, null, null, null);
 
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
-			Child child = cursorToEmploye(cursor);
+			Child child = cursorToChild(cursor);
 			listChildren.add(child);
 			cursor.moveToNext();
 		}
@@ -110,7 +110,7 @@ public class ChildDAO {
 		return listChildren;
 	}
 
-	private Child cursorToEmploye(Cursor cursor) {
+	private Child cursorToChild(Cursor cursor) {
 		Child child = new Child();
 		child.setId(cursor.getLong(0));
 		child.setFirstName(cursor.getString(1));
@@ -120,10 +120,10 @@ public class ChildDAO {
 		child.setPhoneNumber(cursor.getString(5));
 		child.setDate(cursor.getString(6));
 
-		// get The company by id
-		long companyId = cursor.getLong(7);
+		// get The organisation by id
+		long organisationId = cursor.getLong(7);
 		OrganisationDAO dao = new OrganisationDAO(mContext);
-		Organisation organisation = dao.getOrganisationById(companyId);
+		Organisation organisation = dao.getOrganisationById(organisationId);
 		if (organisation != null)
 			child.setOrganisation(organisation);
 

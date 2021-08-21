@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 public class SpinnerOrganisationsAdapter extends BaseAdapter {
 	
-	public static final String TAG = "SpinnerCompnaiesAdapter";
+	public static final String TAG = "SpinnerOrganisationsAdapter";
 	
 	private List<Organisation> mItems;
 	private LayoutInflater mInflater;
@@ -43,7 +43,7 @@ public class SpinnerOrganisationsAdapter extends BaseAdapter {
 		if(v == null) {
 			v = mInflater.inflate(R.layout.spinner_item_organisation, parent, false);
 			holder = new ViewHolder();
-			holder.txtOrganisationName = (TextView) v.findViewById(R.id.txt_company_name);
+			holder.txtOrganisationName = (TextView) v.findViewById(R.id.txt_organisation_name);
 			holder.txtWebsite = (TextView) v.findViewById(R.id.txt_website);
 			v.setTag(holder);
 		}

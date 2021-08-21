@@ -16,7 +16,7 @@ public class AddOrganisationActivity extends Activity implements OnClickListener
 
 	public static final String TAG = "AddOrganisationActivity";
 
-	private EditText mTxtCompanyName;
+	private EditText mTxtOrganisationName;
 	private EditText mTxtAddress;
 	private EditText mTxtPhoneNumber;
 	private EditText mTxtWebsite;
@@ -35,7 +35,7 @@ public class AddOrganisationActivity extends Activity implements OnClickListener
 	}
 
 	private void initViews() {
-		this.mTxtCompanyName = (EditText) findViewById(R.id.txt_company_name);
+		this.mTxtOrganisationName = (EditText) findViewById(R.id.txt_organisation_name);
 		this.mTxtAddress = (EditText) findViewById(R.id.txt_address);
 		this.mTxtPhoneNumber = (EditText) findViewById(R.id.txt_phone_number);
 		this.mTxtWebsite = (EditText) findViewById(R.id.txt_website);
@@ -48,16 +48,16 @@ public class AddOrganisationActivity extends Activity implements OnClickListener
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btn_add:
-			Editable companyName = mTxtCompanyName.getText();
+			Editable organisationName = mTxtOrganisationName.getText();
 			Editable address = mTxtAddress.getText();
 			Editable phoneNumber = mTxtPhoneNumber.getText();
 			Editable website = mTxtWebsite.getText();
-			if (!TextUtils.isEmpty(companyName) && !TextUtils.isEmpty(address)
+			if (!TextUtils.isEmpty(organisationName) && !TextUtils.isEmpty(address)
 					&& !TextUtils.isEmpty(website)
 					&& !TextUtils.isEmpty(phoneNumber)) {
 				// add the organisation to database
 				Organisation createdOrganisation = mOrganisationDao.createOrganisation(
-						companyName.toString(), address.toString(),
+						organisationName.toString(), address.toString(),
 						website.toString(), phoneNumber.toString());
 				
 				Log.d(TAG, "added organisation : "+ createdOrganisation.getName());

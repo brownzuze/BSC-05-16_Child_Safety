@@ -44,7 +44,7 @@ public class ListChildAdapter extends BaseAdapter {
 			v = mInflater.inflate(R.layout.list_item_child, parent, false);
 			holder = new ViewHolder();
 			holder.txtChildName = (TextView) v.findViewById(R.id.txt_employee_name);
-			holder.txtOrganisationName = (TextView) v.findViewById(R.id.txt_company_name);
+			holder.txtOrganisationName = (TextView) v.findViewById(R.id.txt_organisation_name);
 			holder.txtAddress = (TextView) v.findViewById(R.id.txt_address);
 			holder.txtPhoneNumber = (TextView) v.findViewById(R.id.txt_phone_number);
 			holder.txtEmail = (TextView) v.findViewById(R.id.txt_email);
@@ -62,7 +62,7 @@ public class ListChildAdapter extends BaseAdapter {
 			holder.txtAddress.setText(currentItem.getAddress());
 			holder.txtEmail.setText(currentItem.getEmail());
 			holder.txtPhoneNumber.setText(currentItem.getPhoneNumber());
-			holder.txtDate.setText(currentItem.getSalary());
+			holder.txtDate.setText(currentItem.getDate());
 			holder.txtPhoneNumber.setText(currentItem.getPhoneNumber());
 			holder.txtOrganisationName.setText(currentItem.getOrganisation().getName());
 		}

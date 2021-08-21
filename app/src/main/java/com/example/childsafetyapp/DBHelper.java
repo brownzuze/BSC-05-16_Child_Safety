@@ -29,23 +29,23 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_HELPLINE_EMAIL = "orgemail";
 
     // columns of the companies table
-    public static final String TABLE_ORGANISATIONS = "companies";
+    public static final String TABLE_ORGANISATIONS = "organisations";
     public static final String COLUMN_ORGANISATION_ID = "_id";
-    public static final String COLUMN_ORGANISATION_NAME = "company_name";
+    public static final String COLUMN_ORGANISATION_NAME = "organisation_name";
     public static final String COLUMN_ORGANISATION_ADDRESS = "address";
     public static final String COLUMN_ORGANISATION_WEBSITE = "website";
     public static final String COLUMN_ORGANISATION_PHONE_NUMBER = "phone_number";
 
-    // columns of the employees table
-    public static final String TABLE_CHILDREN = "employees";
+    // columns of the childrens table
+    public static final String TABLE_CHILDREN = "childrens";
     public static final String COLUMN_CHILD_ID = COLUMN_ORGANISATION_ID;
     public static final String COLUMN_CHILD_FIRST_NAME = "first_name";
     public static final String COLUMN_CHILD_LAST_NAME = "last_name";
     public static final String COLUMN_CHILD_ADDRESS = COLUMN_ORGANISATION_ADDRESS;
     public static final String COLUMN_CHILD_EMAIL = "email";
     public static final String COLUMN_CHILD_PHONE_NUMBER = COLUMN_ORGANISATION_PHONE_NUMBER;
-    public static final String COLUMN_CHILD_SALARY = "salary";
-    public static final String COLUMN_CHILD_COMPANY_ID = "company_id";
+    public static final String COLUMN_CHILD_SALARY = "date";
+    public static final String COLUMN_CHILD_COMPANY_ID = "organisation_id";
 
     private static final String DATABASE_NAME = "serviceproviderdetails.db";
     private static final int DATABASE_VERSION = 1;
@@ -135,7 +135,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public boolean checkusernamepassword(String username, String password){
 
         SQLiteDatabase MYDB = this.getWritableDatabase();
-       // Cursor cursor3 = MYDB.rawQuery("select * from TABLE_USERS where username = ? and password = ?", new String[] {username, password});
         Cursor cursor = MYDB.rawQuery("select * from users where username = ? and password = ?", new String[] {username, password} );
         if (cursor.getCount()>0)
 

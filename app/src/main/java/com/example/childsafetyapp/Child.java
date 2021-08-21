@@ -13,20 +13,20 @@ public class Child implements Serializable {
 	private String mAddress;
 	private String mPhoneNumber;
 	private String mEmail;
-	private String mSalary;
+	private String mDate;
 	private Organisation mOrganisation;
 
 	public Child() {
 		
 	}
 
-	public Child(String firstName, String lastName, String address, String phoneNumber, String email, String salary) {
+	public Child(String firstName, String lastName, String address, String phoneNumber, String email, String date) {
 		this.mFirstName = firstName;
 		this.mLastName = lastName;
 		this.mAddress = address;
 		this.mPhoneNumber = phoneNumber;
 		this.mEmail = email;
-		this.mSalary = salary;
+		this.mDate = date;
 	}
 
 	public long getId() {
@@ -77,12 +77,12 @@ public class Child implements Serializable {
 		this.mEmail = mEmail;
 	}
 
-	public String getSalary() {
-		return mSalary;
+	public String getDate() {
+		return mDate;
 	}
 
-	public void setDate(String mSalary) {
-		this.mSalary = mSalary;
+	public void setDate(String mDate) {
+		this.mDate = mDate;
 	}
 
 	public Organisation getOrganisation() {

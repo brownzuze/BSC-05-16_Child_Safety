@@ -148,7 +148,7 @@ public class AddChildActivity extends Activity implements OnClickListener, OnIte
 					&& !TextUtils.isEmpty(email) && mSelectedOrganisation != null
 					&& !TextUtils.isEmpty(phoneNumber)) {
 				// add the organisation to database
-				Child createdChild = mChildDao.createEmploye(firstName.toString(), lastName.toString(), address.toString(), email.toString(), phoneNumber.toString(), date.toString(), mSelectedOrganisation.getId());
+				Child createdChild = mChildDao.createChild(firstName.toString(), lastName.toString(), address.toString(), email.toString(), phoneNumber.toString(), date.toString(), mSelectedOrganisation.getId());
 				
 				Log.d(TAG, "added child : "+ createdChild.getFirstName()+" "+ createdChild.getLastName());
 				setResult(RESULT_OK);
