@@ -24,7 +24,7 @@ public class ChildDAO {
 			DBHelper.COLUMN_CHILD_LAST_NAME, DBHelper.COLUMN_CHILD_ADDRESS,
 			DBHelper.COLUMN_CHILD_EMAIL,
 			DBHelper.COLUMN_CHILD_PHONE_NUMBER,
-			DBHelper.COLUMN_CHILD_SALARY, DBHelper.COLUMN_CHILD_COMPANY_ID};
+			DBHelper.COLUMN_CHILD_SALARY, DBHelper.COLUMN_CHILD_ORGANISATION_ID};
 
 	public ChildDAO(Context context) {
 		mDbHelper = new DBHelper(context);
@@ -56,7 +56,7 @@ public class ChildDAO {
 		values.put(DBHelper.COLUMN_CHILD_EMAIL, email);
 		values.put(DBHelper.COLUMN_CHILD_PHONE_NUMBER, phoneNumber);
 		values.put(DBHelper.COLUMN_CHILD_SALARY, date);
-		values.put(DBHelper.COLUMN_CHILD_COMPANY_ID, organisationId);
+		values.put(DBHelper.COLUMN_CHILD_ORGANISATION_ID, organisationId);
 		long insertId = mDatabase
 				.insert(DBHelper.TABLE_CHILDREN, null, values);
 		Cursor cursor = mDatabase.query(DBHelper.TABLE_CHILDREN, mAllColumns,
@@ -96,7 +96,7 @@ public class ChildDAO {
 		List<Child> listChildren = new ArrayList<Child>();
 
 		Cursor cursor = mDatabase.query(DBHelper.TABLE_CHILDREN, mAllColumns,
-				DBHelper.COLUMN_ORGANISATION_ID + " = ?",
+				DBHelper.COLUMN_CHILD_ORGANISATION_ID + " = ?",
 				new String[] { String.valueOf(organisationId) }, null, null, null);
 
 		cursor.moveToFirst();

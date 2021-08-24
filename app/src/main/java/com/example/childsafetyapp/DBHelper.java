@@ -28,7 +28,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_HELPLINE_NUMBER = "orgnumber";
     public static final String COLUMN_HELPLINE_EMAIL = "orgemail";
 
-    // columns of the companies table
+    // columns of the organisations table
     public static final String TABLE_ORGANISATIONS = "organisations";
     public static final String COLUMN_ORGANISATION_ID = "_id";
     public static final String COLUMN_ORGANISATION_NAME = "organisation_name";
@@ -45,7 +45,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_CHILD_EMAIL = "email";
     public static final String COLUMN_CHILD_PHONE_NUMBER = COLUMN_ORGANISATION_PHONE_NUMBER;
     public static final String COLUMN_CHILD_SALARY = "date";
-    public static final String COLUMN_CHILD_COMPANY_ID = "organisation_id";
+    public static final String COLUMN_CHILD_ORGANISATION_ID = "organisation_id";
 
     private static final String DATABASE_NAME = "serviceproviderdetails.db";
     private static final int DATABASE_VERSION = 1;
@@ -59,7 +59,7 @@ public class DBHelper extends SQLiteOpenHelper {
             + COLUMN_CHILD_EMAIL + " TEXT NOT NULL, "
             + COLUMN_CHILD_PHONE_NUMBER + " TEXT NOT NULL, "
             + COLUMN_CHILD_SALARY + " REAL NOT NULL, "
-            + COLUMN_CHILD_COMPANY_ID + " INTEGER NOT NULL "
+            + COLUMN_CHILD_ORGANISATION_ID + " INTEGER NOT NULL "
             + ");";
 
     // SQL statement of the organisation table creation

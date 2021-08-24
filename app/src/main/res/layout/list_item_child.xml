@@ -65,7 +65,18 @@
         android:layout_above="@+id/txt_address"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:text="@string/salary"
+        android:text="@string/date"
         android:textColor="@android:color/black" />
+
+    <ImageView
+        android:id="@+id/sync_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/txt_phone_number"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_baseline_sync_24"/>
+
+
 
 </RelativeLayout>
