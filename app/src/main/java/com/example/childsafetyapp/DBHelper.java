@@ -11,6 +11,7 @@ import android.util.Log;
 public class DBHelper extends SQLiteOpenHelper {
 
     public static final String TAG = "DBHelper";
+    public static final String SERVER_URL="http://192.168.137.2/childsafetysync/syncinfo.php";
 
     //columns of the users table
 

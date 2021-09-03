@@ -45,4 +45,9 @@ dependencies {
     //Navigation component
     implementation 'androidx.navigation:navigation-fragment-ktx:2.2.0-rc03'
     implementation 'androidx.navigation:navigation-ui-ktx:2.2.0-rc03'
+    implementation 'com.android.volley:volley:1.2.1'
+
+
+
+
 }

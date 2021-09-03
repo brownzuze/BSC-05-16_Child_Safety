@@ -1,11 +1,16 @@
 package com.example.childsafetyapp;
 
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -20,18 +25,33 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class AddChildActivity extends Activity implements OnClickListener, OnItemSelectedListener {
+
+	private static final String url="http://192.168.137.58/childsync/db_insert.php";
 
 	public static final String TAG = "AddChildActivity";
 	DatePickerDialog datePickerDialog;
 	EditText datePicker;
 	private EditText mTxtFirstName;
 	private EditText mTxtLastName;
-	private EditText mTxtAddress;
+	private EditText mTxtGuardian;
+	private EditText mTxtPhysicalAddress;
 	private EditText mTxtPhoneNumber;
-	private EditText mTxtEmail;
 	private EditText mTxtDate;
-	private Spinner mSpinnerCompany;
+	private Spinner mSpinnerOrganisation;
 	private Button mBtnAdd;
 
 	private OrganisationDAO mOrganisationDao;
@@ -57,8 +77,8 @@ public class AddChildActivity extends Activity implements OnClickListener, OnIte
 		List<Organisation> listCompanies = mOrganisationDao.getAllOrganisations();
 		if(listCompanies != null) {
 			mAdapter = new SpinnerOrganisationsAdapter(this, listCompanies);
-			mSpinnerCompany.setAdapter(mAdapter);
-			mSpinnerCompany.setOnItemSelectedListener(this);
+			mSpinnerOrganisation.setAdapter(mAdapter);
+			mSpinnerOrganisation.setOnItemSelectedListener(this);
 		}
 	}
 
@@ -122,11 +142,11 @@ public class AddChildActivity extends Activity implements OnClickListener, OnIte
 	private void initViews() {
 		this.mTxtFirstName = (EditText) findViewById(R.id.txt_first_name);
 		this.mTxtLastName = (EditText) findViewById(R.id.txt_last_name);
-		this.mTxtAddress = (EditText) findViewById(R.id.txt_address);
+		this.mTxtGuardian = (EditText) findViewById(R.id.txt_guardian);
+		this.mTxtPhysicalAddress = (EditText) findViewById(R.id.txt_physical_address);
 		this.mTxtPhoneNumber = (EditText) findViewById(R.id.txt_phone_number);
-		this.mTxtEmail = (EditText) findViewById(R.id.txt_email);
 		this.mTxtDate = (EditText) findViewById(R.id.txt_datepiker);
-		this.mSpinnerCompany = (Spinner) findViewById(R.id.spinner_companies);
+		this.mSpinnerOrganisation = (Spinner) findViewById(R.id.spinner_companies);
 		this.mBtnAdd = (Button) findViewById(R.id.btn_add);
 
 		this.mBtnAdd.setOnClickListener(this);
@@ -136,26 +156,21 @@ public class AddChildActivity extends Activity implements OnClickListener, OnIte
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btn_add:
-			Editable firstName = mTxtFirstName.getText();
+			/*Editable firstName = mTxtFirstName.getText();
 			Editable lastName = mTxtLastName.getText();
-			Editable address = mTxtAddress.getText();
+			Editable guardian = mTxtGuardian.getText();
+			Editable physicalAddress = mTxtPhysicalAddress.getText();
 			Editable phoneNumber = mTxtPhoneNumber.getText();
-			Editable email = mTxtEmail.getText();
 			Editable date = mTxtDate.getText();
-			mSelectedOrganisation = (Organisation) mSpinnerCompany.getSelectedItem();
-			if (!TextUtils.isEmpty(firstName) && !TextUtils.isEmpty(lastName)
-					&& !TextUtils.isEmpty(address) && !TextUtils.isEmpty(date)
-					&& !TextUtils.isEmpty(email) && mSelectedOrganisation != null
-					&& !TextUtils.isEmpty(phoneNumber)) {
-				// add the organisation to database
-				Child createdChild = mChildDao.createChild(firstName.toString(), lastName.toString(), address.toString(), email.toString(), phoneNumber.toString(), date.toString(), mSelectedOrganisation.getId());
-				
-				Log.d(TAG, "added child : "+ createdChild.getFirstName()+" "+ createdChild.getLastName());
-				setResult(RESULT_OK);
-				finish();
+			mSelectedOrganisation = (Organisation) mSpinnerOrganisation.getSelectedItem();*/
+
+			if(checkNetworkConnection()) {
+
+				insertdata();
 			}
 			else {
-				Toast.makeText(this, R.string.empty_fields_message, Toast.LENGTH_LONG).show();
+				//Toast.makeText(this, R.string.empty_fields_message, Toast.LENGTH_LONG).show();
+				savetolocalstorage();
 			}
 			break;
 
@@ -179,5 +194,111 @@ public class AddChildActivity extends Activity implements OnClickListener, OnIte
 	@Override
 	public void onNothingSelected(AdapterView<?> parent) {
 		
+	}
+
+
+	private void insertdata()
+	{
+
+
+		final String firstname=mTxtFirstName.getText().toString().trim();
+		final String lastname=mTxtLastName.getText().toString().trim();
+		final String guardian=mTxtGuardian.getText().toString().trim();
+		final String physicaladdress=mTxtPhysicalAddress.getText().toString().trim();
+		final String phonenumber=mTxtPhoneNumber.getText().toString().trim();
+		final String date=mTxtDate.getText().toString().trim();
+		mSelectedOrganisation = (Organisation) mSpinnerOrganisation.getSelectedItem();
+		final String organisation= mSelectedOrganisation.getName();
+
+
+
+
+
+
+		StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+			@Override
+			public void onResponse(String response)
+			{
+
+				mTxtFirstName.setText("");
+				mTxtLastName.setText("");
+				mTxtGuardian.setText("");
+				mTxtPhysicalAddress.setText("");
+				mTxtPhoneNumber.setText("");
+				mTxtDate.setText("");
+
+				Toast.makeText(getApplicationContext(),response.toString(),Toast.LENGTH_LONG).show();
+
+				try {
+					JSONObject jsonObject = new JSONObject(response);
+					  String Response = jsonObject.getString("response");
+					  if(Response.equals("OK"))
+					  {
+						  savetolocalstorage();
+					  }
+					  else
+					  {
+					  	savetolocalstorage();
+					  }
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+
+			}
+		}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				savetolocalstorage();
+				//Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
+			}
+		}){
+			@Override
+			protected Map<String, String> getParams() throws AuthFailureError
+			{
+				Map<String,String> param=new HashMap<String,String>();
+				param.put("t1",firstname);
+				param.put("t2",lastname);
+				param.put("t3",guardian);
+				param.put("t4",physicaladdress);
+				param.put("t5",phonenumber);
+				param.put("t6",date);
+				param.put("t7",organisation);
+
+
+
+
+				return param;
+			}
+		};
+
+
+		RequestQueue queue= Volley.newRequestQueue(getApplicationContext());
+		queue.add(request);
+
+	}
+	private void savetolocalstorage(){
+		Editable firstName = mTxtFirstName.getText();
+		Editable lastName = mTxtLastName.getText();
+		Editable guardian = mTxtGuardian.getText();
+		Editable physicalAddress = mTxtPhysicalAddress.getText();
+		Editable phoneNumber = mTxtPhoneNumber.getText();
+		Editable date = mTxtDate.getText();
+		mSelectedOrganisation = (Organisation) mSpinnerOrganisation.getSelectedItem();
+		if (!TextUtils.isEmpty(firstName) && !TextUtils.isEmpty(lastName)
+				&& !TextUtils.isEmpty(guardian) && !TextUtils.isEmpty(date)
+				&& !TextUtils.isEmpty(phoneNumber) && mSelectedOrganisation != null
+				&& !TextUtils.isEmpty(physicalAddress)) {
+			// add the organisation to database
+			Child createdChild = mChildDao.createChild(firstName.toString(), lastName.toString(), guardian.toString(), phoneNumber.toString(), physicalAddress.toString(), date.toString(), mSelectedOrganisation.getId());
+
+			Log.d(TAG, "added child : "+ createdChild.getFirstName()+" "+ createdChild.getLastName());
+			setResult(RESULT_OK);
+			finish();
+		}
+	}
+	public boolean checkNetworkConnection(){
+		ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+		return  (networkInfo!= null && networkInfo.isConnected());
 	}
 }

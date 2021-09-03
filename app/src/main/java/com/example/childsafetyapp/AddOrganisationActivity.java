@@ -36,7 +36,7 @@ public class AddOrganisationActivity extends Activity implements OnClickListener
 
 	private void initViews() {
 		this.mTxtOrganisationName = (EditText) findViewById(R.id.txt_organisation_name);
-		this.mTxtAddress = (EditText) findViewById(R.id.txt_address);
+		this.mTxtAddress = (EditText) findViewById(R.id.txt_guardian);
 		this.mTxtPhoneNumber = (EditText) findViewById(R.id.txt_phone_number);
 		this.mTxtWebsite = (EditText) findViewById(R.id.txt_website);
 		this.mBtnAdd = (Button) findViewById(R.id.btn_add);

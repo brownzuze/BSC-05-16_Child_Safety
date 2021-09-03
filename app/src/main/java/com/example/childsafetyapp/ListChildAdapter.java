@@ -45,9 +45,9 @@ public class ListChildAdapter extends BaseAdapter {
 			holder = new ViewHolder();
 			holder.txtChildName = (TextView) v.findViewById(R.id.txt_employee_name);
 			holder.txtOrganisationName = (TextView) v.findViewById(R.id.txt_organisation_name);
-			holder.txtAddress = (TextView) v.findViewById(R.id.txt_address);
+			holder.txtAddress = (TextView) v.findViewById(R.id.txt_guardian);
 			holder.txtPhoneNumber = (TextView) v.findViewById(R.id.txt_phone_number);
-			holder.txtEmail = (TextView) v.findViewById(R.id.txt_email);
+			holder.txtEmail = (TextView) v.findViewById(R.id.txt_physical_address);
 			holder.txtDate = (TextView) v.findViewById(R.id.txt_datepiker);
 			v.setTag(holder);
 		}

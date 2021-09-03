@@ -27,7 +27,7 @@
         android:textColor="@android:color/black" />
 
     <EditText
-        android:id="@+id/txt_address"
+        android:id="@+id/txt_guardian"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txt_last_name"
@@ -40,10 +40,10 @@
         android:textColor="@android:color/black" />
 
     <EditText
-        android:id="@+id/txt_email"
+        android:id="@+id/txt_physical_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_address"
+        android:layout_below="@+id/txt_guardian"
         android:layout_marginTop="8dp"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
@@ -54,7 +54,7 @@
         android:id="@+id/txt_phone_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_email"
+        android:layout_below="@+id/txt_physical_address"
         android:layout_marginTop="8dp"
         android:hint="@string/phone_number"
         android:inputType="phone"
